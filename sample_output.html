@@ -1,0 +1,131 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Portfolio Performance</title>
+<style>
+  :root { --bg:#0f1419; --card:#1a212b; --line:#2a3441; --txt:#e6edf3;
+          --muted:#8b98a5; --pos:#3fb950; --neg:#f85149; --accent:#58a6ff; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+         background:var(--bg); color:var(--txt); padding:32px; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  h1 { font-size:22px; margin:0 0 4px; }
+  .sub { color:var(--muted); margin:0 0 24px; font-size:14px; }
+  form { background:var(--card); border:1px solid var(--line); border-radius:10px;
+         padding:18px; display:flex; gap:12px; align-items:center; flex-wrap:wrap; }
+  input[type=file] { color:var(--muted); }
+  button { background:var(--accent); color:#04121f; border:0; border-radius:7px;
+           padding:9px 18px; font-weight:600; cursor:pointer; }
+  .err { background:#3d1c1c; border:1px solid var(--neg); color:#ffb3ad;
+         padding:12px 16px; border-radius:8px; margin:20px 0; }
+  .cards { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+           gap:14px; margin:24px 0; }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px; }
+  .card .label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+  .card .val { font-size:22px; font-weight:650; margin-top:6px; }
+  table { width:100%; border-collapse:collapse; margin-top:8px; font-variant-numeric:tabular-nums;
+          background:var(--card); border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  th,td { padding:10px 12px; text-align:right; border-bottom:1px solid var(--line); }
+  th { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.03em; font-weight:600; }
+  th:first-child, td:first-child { text-align:left; font-weight:600; }
+  tbody tr:last-child td { border-bottom:0; }
+  tbody tr:hover { background:#212a35; }
+  .pos { color:var(--pos); } .neg { color:var(--neg); } .neutral { color:var(--muted); }
+  .hint { color:var(--muted); font-size:13px; margin-top:18px; }
+  code { background:#0b0f14; padding:2px 6px; border-radius:4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Portfolio Performance</h1>
+  <p class="sub">Upload a CSV with columns: ticker, shares, buy_price, and optionally buy_date.</p>
+
+  <form method="post" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".csv" required>
+    <button type="submit">Analyze</button>
+  </form>
+
+  
+
+  
+    <div class="cards">
+      <div class="card"><div class="label">Cost Basis</div><div class="val">4,180.00</div></div>
+      <div class="card"><div class="label">Current Value</div><div class="val">6,230.00</div></div>
+      <div class="card"><div class="label">Absolute Return</div>
+        <div class="val pos">2,050.00 (+49.04%)</div></div>
+      <div class="card"><div class="label">Portfolio CAGR</div>
+        <div class="val pos">+8.93%</div></div>
+    </div>
+
+    
+
+    <table>
+      <thead><tr>
+        <th>Ticker</th><th>Shares</th><th>Buy Price</th><th>Current</th>
+        <th>Cost Basis</th><th>Value</th><th>Abs Return</th><th>Abs %</th>
+        <th>Years</th><th>CAGR</th>
+      </tr></thead>
+      <tbody>
+      
+        <tr>
+          <td>AAPL</td>
+          <td>10.00</td>
+          <td>150.00</td>
+          <td>210.00</td>
+          <td>1,500.00</td>
+          <td>2,100.00</td>
+          <td class="pos">600.00</td>
+          <td class="pos">+40.00%</td>
+          <td>4.45</td>
+          <td class="pos">+7.86%</td>
+        </tr>
+      
+        <tr>
+          <td>MSFT</td>
+          <td>5.00</td>
+          <td>280.00</td>
+          <td>450.00</td>
+          <td>1,400.00</td>
+          <td>2,250.00</td>
+          <td class="pos">850.00</td>
+          <td class="pos">+60.71%</td>
+          <td>5.07</td>
+          <td class="pos">+9.80%</td>
+        </tr>
+      
+        <tr>
+          <td>NVDA</td>
+          <td>4.00</td>
+          <td>45.00</td>
+          <td>120.00</td>
+          <td>180.00</td>
+          <td>480.00</td>
+          <td class="pos">300.00</td>
+          <td class="pos">+166.67%</td>
+          <td>3.30</td>
+          <td class="pos">+34.59%</td>
+        </tr>
+      
+        <tr>
+          <td>KO</td>
+          <td>20.00</td>
+          <td>55.00</td>
+          <td>70.00</td>
+          <td>1,100.00</td>
+          <td>1,400.00</td>
+          <td class="pos">300.00</td>
+          <td class="pos">+27.27%</td>
+          <td>n/a</td>
+          <td class="neutral">n/a</td>
+        </tr>
+      
+      </tbody>
+    </table>
+    <p class="hint">Prices are split/dividend-adjusted. CAGR is annualized return; it needs a buy_date and is skipped otherwise.</p>
+  
+</div>
+</body>
+</html>
